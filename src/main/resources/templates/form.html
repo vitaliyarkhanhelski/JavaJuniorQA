@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Save Record</title>
+</head>
+<body>
+<h1>Save Record</h1>
+<form action="#" th:action="@{/save}" th:object="${message}" method="post">
+
+    Select Letter:
+    <select th:field="*{character}">
+        <option th:each="letter : ${letters}"
+                th:value="${letter}"
+                th:text="${letter}"/>
+    </select>
+
+    <input type="hidden" th:field="*{id}">
+
+    <input type="text" th:field="*{name}" placeholder="Title">
+    <br>
+    <br>
+    <textarea style="width:500px;height:400px;" th:field="*{description}" placeholder="Description"></textarea>
+
+    <button type="submit">Save</button>
+
+</form>
+<hr>
+<a th:href="@{/}">Back to Java Junior Q@A</a>
+
+
+</body>
+</html>
