@@ -2,40 +2,87 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
     <title>Java Junior Q&A</title>
 </head>
+
 <body>
-<h1>Java Junior Q&A</h1>
 
-
-<form action="/find">
-    <h3>
-        Select Letter:
-    </h3>
-    <select name="info">
-        <option value="all">Find All</option>
-        <option th:each="letter : ${letters}"
-                th:value="${letter}"
-                th:text="${letter}"/>
-    </select>
-
-    <input type="submit" value="Send">
-</form>
-<br>
-<a th:href="@{/showFormForAdd}">Add Record</a>
-<br>
-<ul>
-    <li th:each="message : ${messages}">
-        <h1 th:text="${message.character}"></h1>
-        <h2 th:text="${message.name}"></h2>
-        <h3 th:text="${message.description}"></h3>
-        <div>
-            <a th:href="@{/showFormForUpdate(messageId=${message.id})}">Update</a>
-            <a th:href="@{/delete(messageId=${message.id})}"
-               onclick="if(!(confirm('Are you sure you want to delete this record?')))return false">Delete</a>
+<div class="p-1 mb-1 bg-light text-dark" style="position: sticky; top:0; z-index: 10">
+    <h2 style="font-weight: bold; text-align: center">Java Junior Q&A</h2>
+</div>
+<div class="container">
+    <div>
+        <div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px">
+            <form action="/find" style="padding: 10px" class="form-inline">
+                <label class="my-1 mr-2 h5" for="inlineFormCustomSelectPref"><b>Select Letter:</b></label>
+                <select name="info" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                    <option value="all">Find All</option>
+                    <option th:each="letter : ${letters}"
+                            th:value="${letter}"
+                            th:text="${letter}"/>
+                </select>
+                <button type="submit" class="btn btn-primary my-1">Submit</button>
+            </form>
         </div>
-        <hr>
-    </li>
-</ul>
+
+
+        <a th:href="@{/showFormForAdd}" class="btn btn-primary my-2 mb-3 ">Add Record</a>
+        <br>
+
+        <ul style="list-style: none" class="list-group">
+            <li class="list-group-item list-group-item-light text-dark" style="border-radius: 10px"
+                th:each="message : ${messages}">
+                <!--            <div class="p-3 mb-2 bg-dark text-white" style="border-radius: 15px">-->
+
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            <div>
+                                <h1 style="text-align:center; font-weight: bold" th:text="${message.character}"/></h1>
+
+                            </div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <h2 style="font-weight: bold" th:text="${message.name}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span th:text="${message.description}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <a th:href="@{/showFormForUpdate(messageId=${message.id})}"
+                                   class="btn btn-info">Update</a>
+                                <span style="padding-left: 2px"></span>
+                                <a th:href="@{/delete(messageId=${message.id})}"
+                                   onclick="if(!(confirm('Are you sure you want to delete this record?')))return false"
+                                   class="btn btn-danger my-2 mb-2">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="card-footer text-muted">
+    Developed by <a href="https://www.linkedin.com/in/vitaliyarkhanhelski/">Vitaliy Arkhanhelski</a> 2020
+</div>
+
 </body>
 </html>

@@ -15,9 +15,9 @@ public class LoadData {
     CommandLineRunner initDataBase(MessageRepository messageRepository) {
         return args -> {
             log.info("Preloading " + messageRepository.save(
-                    new Message('I', "BB", "Klasa - to definija obiektu")));
+                    new Message('K', "Klasa", "Klasa - to definija obiektu")));
             log.info("Preloading " + messageRepository.save(
-                    new Message('I', "AA", "Interfejs - to zbiór deklaracji abstrakcyjnych metod ")));
+                    new Message('I', "Interface", "Interface - to zbiór deklaracji abstrakcyjnych metod ")));
 
         };
     }
