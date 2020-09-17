@@ -30,9 +30,10 @@ public class Message {
     @Column(name = "is_favorite")
     private Boolean isFavorite;
 
-    public Message(Character character, String name, String description) {
+    public Message(Character character, String name, String description, Boolean isFavorite) {
         this.character = character;
         this.name = name;
         this.description = description;
+        this.isFavorite = isFavorite;
     }
 }
