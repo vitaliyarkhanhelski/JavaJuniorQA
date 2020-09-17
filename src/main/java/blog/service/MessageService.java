@@ -5,6 +5,7 @@ import blog.model.Message;
 import blog.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -57,5 +58,11 @@ public class MessageService {
 
     public Message findById(int id) {
         return messageRepository.findById(id).get();
+    }
+
+    public List<Message> findById2(int id) {
+        List<Message> messages = new ArrayList<>();
+        messages.add(messageRepository.findById(id).get());
+        return messages;
     }
 }

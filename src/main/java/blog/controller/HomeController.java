@@ -39,6 +39,14 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/findRecord")
+    public String findByChar(ModelMap map, @RequestParam ("messageId") int id) {
+
+        map.put("letters", MessageService.letters);
+        map.put("messages", messageService.findById2(id));
+        return "index";
+    }
+
     @GetMapping("/delete")
     public String deleteById(@RequestParam ("messageId") int id) {
         messageService.deleteById(id);

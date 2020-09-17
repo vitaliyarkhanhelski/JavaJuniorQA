@@ -70,6 +70,10 @@
                                 <a th:href="@{/delete(messageId=${message.id})}"
                                    onclick="if(!(confirm('Are you sure you want to delete this record?')))return false"
                                    class="btn btn-danger my-2 mb-2">Delete</a>
+                                <span style="padding-left: 2px"></span>
+                                <a th:href="@{/findRecord(messageId=${message.id})}"
+                                   class="btn btn-success">Show</a>
+                                <span style="padding-left: 2px"></span>
                             </div>
                         </td>
                     </tr>
@@ -78,7 +82,10 @@
             </li>
         </ul>
     </div>
+    <hr>
+    <h5><a th:href="@{/}">Back to Java Junior Q&A</a></h5>
 </div>
+
 
 <div class="fixed-bottom text-muted mb-1" style="text-align: right">
     <div style="margin-right: 10px">
