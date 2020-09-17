@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class MessageService {
 
-    public static final String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K","L","M","N","O","P","R","S","T","U","W","Y","Z"};
+    public static final String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "W", "Y", "Z"};
 
     private MessageRepository messageRepository;
 
@@ -53,6 +53,7 @@ public class MessageService {
 
 
     public void save(Message message) {
+        message.setIsFavorite(false);
         messageRepository.save(message);
     }
 
@@ -64,5 +65,20 @@ public class MessageService {
         List<Message> messages = new ArrayList<>();
         messages.add(messageRepository.findById(id).get());
         return messages;
+    }
+
+    public void checkFavorite(int id) {
+        Message myMessage = messageRepository.findById(id).get();
+        if (myMessage.getIsFavorite())
+            myMessage.setIsFavorite(false);
+        else myMessage.setIsFavorite(true);
+        messageRepository.save(myMessage);
+    }
+
+    public List<Message> findAllFavorites() {
+        List<Message> list = new ArrayList<>();
+        for (Message message : messageRepository.findAll())
+            if (message.getIsFavorite()) list.add(message);
+        return list;
     }
 }

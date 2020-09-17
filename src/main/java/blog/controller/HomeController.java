@@ -20,12 +20,26 @@ public class HomeController {
         this.messageService = messageService;
     }
 
-
     @GetMapping
     public String findAll(ModelMap map) {
         map.put("letters", MessageService.letters);
         map.put("messages", messageService.findAll());
         return "index";
+    }
+
+    @GetMapping("/showFavorites")
+    public String showFavorites(ModelMap map) {
+        map.put("letters", MessageService.letters);
+        List<Message> list = messageService.findAllFavorites();
+        Collections.sort(list, new SortByCharAndName());
+        map.put("messages", list);
+        return "index";
+    }
+
+    @GetMapping("/favorite")
+    public String isFavorite(ModelMap map, @RequestParam("messageId") int id) {
+        messageService.checkFavorite(id);
+        return "redirect:";
     }
 
     @GetMapping("/find")
@@ -40,7 +54,7 @@ public class HomeController {
     }
 
     @GetMapping("/findRecord")
-    public String findByChar(ModelMap map, @RequestParam ("messageId") int id) {
+    public String findByChar(ModelMap map, @RequestParam("messageId") int id) {
 
         map.put("letters", MessageService.letters);
         map.put("messages", messageService.findById2(id));
@@ -48,7 +62,7 @@ public class HomeController {
     }
 
     @GetMapping("/delete")
-    public String deleteById(@RequestParam ("messageId") int id) {
+    public String deleteById(@RequestParam("messageId") int id) {
         messageService.deleteById(id);
         return "redirect:";
     }
@@ -62,14 +76,14 @@ public class HomeController {
     }
 
     @GetMapping("/showFormForUpdate")
-    public String showFormForUpdate(@RequestParam ("messageId") int id, ModelMap map) {
+    public String showFormForUpdate(@RequestParam("messageId") int id, ModelMap map) {
         map.put("message", messageService.findById(id));
         map.put("letters", MessageService.letters);
         return "form";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute ("message") Message message) {
+    public String save(@ModelAttribute("message") Message message) {
         messageService.save(message);
         return "redirect:";
     }

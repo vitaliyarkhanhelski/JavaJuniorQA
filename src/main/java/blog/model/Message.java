@@ -27,6 +27,9 @@ public class Message {
     @Lob
     private String description;
 
+    @Column(name = "is_favorite")
+    private Boolean isFavorite;
+
     public Message(Character character, String name, String description) {
         this.character = character;
         this.name = name;
