@@ -20,13 +20,6 @@ public class HomeController {
         this.messageService = messageService;
     }
 
-    //    @GetMapping
-//    public String findAll(ModelMap map){
-//        List<Message> list = messageRepository.findAll();
-//        Collections.sort(list, new SortByCharAndName());
-//        map.put("messages", list);
-//        return "index";
-//    }
 
     @GetMapping
     public String findAll(ModelMap map) {

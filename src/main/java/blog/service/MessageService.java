@@ -22,6 +22,7 @@ public class MessageService {
 
     public List<Message> findAll() {
         List<Message> sortedMessages = messageRepository.findAll();
+        if (sortedMessages.isEmpty()) return sortedMessages;
         Collections.sort(sortedMessages, new SortByCharAndName());
 
         Character character = sortedMessages.get(0).getCharacter();
