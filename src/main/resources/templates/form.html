@@ -18,16 +18,18 @@
 
     <form action="#" th:action="@{/save}" th:object="${message}" method="post">
         <div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px">
-            <label class="my-1 mr-2 h5" for="inlineFormCustomSelectPref"><b>Select Letter:</b></label>
-            <select th:field="*{character}" id="inlineFormCustomSelectPref">
-                <option th:each="letter : ${letters}"
-                        th:value="${letter}"
-                        th:text="${letter}"/>
-            </select>
+            <h5>
+                <label class="my-1 mr-2 mb-1" for="inlineFormCustomSelectPref"><b>Select Letter:</b></label>
+                <select th:field="*{character}" id="inlineFormCustomSelectPref">
+                    <option th:each="letter : ${letters}"
+                            th:value="${letter}"
+                            th:text="${letter}"/>
+                </select>
+            </h5>
 
             <input type="hidden" th:field="*{id}">
 
-            <input type="text" th:field="*{name}" placeholder="Title" required>
+            <input class="form-control" type="text" th:field="*{name}" placeholder="Title" required>
         </div>
         <textarea style="width:100%;height:400px;" th:field="*{description}" placeholder="Description"></textarea>
 
