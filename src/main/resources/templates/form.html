@@ -10,29 +10,39 @@
     <title>Save Record</title>
 </head>
 <body>
+<div class="p-1 mb-1 bg-light text-dark">
+    <h2 style="font-weight: bold; text-align: center">Save Record</h2>
+</div>
+
 <div class="container">
-<h1>Save Record</h1>
-<form action="#" th:action="@{/save}" th:object="${message}" method="post">
 
-    Select Letter:
-    <select th:field="*{character}">
-        <option th:each="letter : ${letters}"
-                th:value="${letter}"
-                th:text="${letter}"/>
-    </select>
+    <form action="#" th:action="@{/save}" th:object="${message}" method="post">
+        <div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px">
+            <label class="my-1 mr-2 h5" for="inlineFormCustomSelectPref"><b>Select Letter:</b></label>
+            <select th:field="*{character}" id="inlineFormCustomSelectPref">
+                <option th:each="letter : ${letters}"
+                        th:value="${letter}"
+                        th:text="${letter}"/>
+            </select>
 
-    <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{id}">
 
-    <input type="text" th:field="*{name}" placeholder="Title" required>
-    <br>
-    <br>
-    <textarea style="width:500px;height:400px;" th:field="*{description}" placeholder="Description"></textarea>
+            <input type="text" th:field="*{name}" placeholder="Title" required>
+        </div>
+        <textarea style="width:100%;height:400px;" th:field="*{description}" placeholder="Description"></textarea>
 
-    <button type="submit">Save</button>
+        <div>
+            <button type="submit" class="btn btn-primary my-2">Save</button>
+        </div>
+    </form>
+    <hr>
+    <h5><a th:href="@{/}">Back to Java Junior Q&A</a></h5>
+</div>
 
-</form>
-<hr>
-<a th:href="@{/}">Back to Java Junior Q@A</a>
+<div class="fixed-bottom text-muted mb-1" style="text-align: right">
+    <div style="margin-right: 10px">
+        Developed by <a href="https://www.linkedin.com/in/vitaliyarkhanhelski/">Vitaliy Arkhanhelski</a> 2020
+    </div>
 </div>
 
 </body>
