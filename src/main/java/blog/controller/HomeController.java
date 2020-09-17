@@ -53,6 +53,15 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/findFavorites")
+    public String findFavoritesByChar(ModelMap map, @RequestParam("info") Character info) {
+
+        map.put("letters", MessageService.letters);
+
+        map.put("messages", messageService.findFavoritesByChar(info));
+        return "index";
+    }
+
     @GetMapping("/findRecord")
     public String findByChar(ModelMap map, @RequestParam("messageId") int id) {
 

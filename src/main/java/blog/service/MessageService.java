@@ -39,7 +39,21 @@ public class MessageService {
 
 
     public List<Message> findByChar(Character character) {
-        List<Message> sortedMessages = messageRepository.findByCharacter(character);
+        List<Message> sortedMessages = new ArrayList<>();
+        for (Message message : messageRepository.findAll())
+            if (message.getCharacter().equals(character)) sortedMessages.add(message);
+
+        Collections.sort(sortedMessages, new SortByCharAndName());
+        for (int i = 1; i < sortedMessages.size(); i++)
+            sortedMessages.get(i).setCharacter(null);
+        return sortedMessages;
+    }
+
+    public List<Message> findFavoritesByChar(Character character) {
+        List<Message> sortedMessages = new ArrayList<>();
+        for (Message message : findAllFavorites())
+            if (message.getCharacter().equals(character)) sortedMessages.add(message);
+
         Collections.sort(sortedMessages, new SortByCharAndName());
         for (int i = 1; i < sortedMessages.size(); i++)
             sortedMessages.get(i).setCharacter(null);
@@ -53,7 +67,6 @@ public class MessageService {
 
 
     public void save(Message message) {
-//        message.setIsFavorite(false);
         messageRepository.save(message);
     }
 

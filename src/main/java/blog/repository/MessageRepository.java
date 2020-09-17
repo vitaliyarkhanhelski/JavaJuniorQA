@@ -9,9 +9,4 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends JpaRepository<Message,Integer> {
 
-//    List<Message> findAllByOrderByCharacter();
-
-    List<Message> findByCharacter(Character character);
-    List<Message> findByIsFavorite(Boolean b);
-
 }

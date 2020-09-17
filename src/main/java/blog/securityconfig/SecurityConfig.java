@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/delete").hasRole("ADMIN")
                 .antMatchers("/showFormForAdd").hasRole("ADMIN")
                 .antMatchers("/showFormForUpdate").hasRole("ADMIN")
+                .antMatchers("/favorite").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
