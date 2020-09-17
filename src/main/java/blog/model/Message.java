@@ -24,7 +24,7 @@ public class Message {
     @Column(nullable = false)
     private String name;
 
-
+    @Lob
     private String description;
 
     public Message(Character character, String name, String description) {
