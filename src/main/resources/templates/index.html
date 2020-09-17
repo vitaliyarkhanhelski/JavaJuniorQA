@@ -48,6 +48,8 @@
 
         <br>
 
+        <h4 th:if="${noRecords!=null}" th:text="${noRecords}"></h4>
+
         <ul style="list-style: none" class="list-group">
             <li class="list-group-item list-group-item-light text-dark" style="border-radius: 10px"
                 th:each="message : ${messages}">

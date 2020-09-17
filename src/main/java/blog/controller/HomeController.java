@@ -23,9 +23,15 @@ public class HomeController {
     @GetMapping
     public String findAll(ModelMap map) {
         map.put("letters", MessageService.letters);
-        map.put("messages", messageService.findAll());
+
+        List<Message> list = messageService.findAll();
+
+        if (list.isEmpty()) map.put("noRecords", "No Records Found");
+        else map.put("messages", list);
+
         return "index";
     }
+
 
     @GetMapping("/showFavorites")
     public String showFavorites(ModelMap map) {
@@ -33,14 +39,18 @@ public class HomeController {
         List<Message> list = messageService.findAllFavorites();
         Collections.sort(list, new SortByCharAndName());
         map.put("messages", list);
+
+        if (list.isEmpty()) map.put("noRecords", "No Records Found");
         return "index";
     }
+
 
     @GetMapping("/favorite")
     public String isFavorite(ModelMap map, @RequestParam("messageId") int id) {
         messageService.checkFavorite(id);
         return "redirect:";
     }
+
 
     @GetMapping("/find")
     public String findByChar(ModelMap map, @RequestParam("info") String info) {
@@ -49,9 +59,14 @@ public class HomeController {
 
         if (info.equals("all")) return "redirect:";
         Character character = info.charAt(0);
-        map.put("messages", messageService.findByChar(character));
+        List<Message> list = messageService.findByChar(character);
+
+        if (list.isEmpty()) map.put("noRecords", "No Records Found");
+        else map.put("messages", list);
+
         return "index";
     }
+
 
     @GetMapping("/findFavorites")
     public String findFavoritesByChar(ModelMap map, @RequestParam("info") Character info) {
@@ -59,22 +74,25 @@ public class HomeController {
         map.put("letters", MessageService.letters);
 
         map.put("messages", messageService.findFavoritesByChar(info));
+        if (messageService.findFavoritesByChar(info).isEmpty()) map.put("noRecords", "No Records Found");
         return "index";
     }
 
+
     @GetMapping("/findRecord")
     public String findByChar(ModelMap map, @RequestParam("messageId") int id) {
-
         map.put("letters", MessageService.letters);
         map.put("messages", messageService.findById2(id));
         return "index";
     }
+
 
     @GetMapping("/delete")
     public String deleteById(@RequestParam("messageId") int id) {
         messageService.deleteById(id);
         return "redirect:";
     }
+
 
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(ModelMap map) {
@@ -84,12 +102,14 @@ public class HomeController {
         return "form";
     }
 
+
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("messageId") int id, ModelMap map) {
         map.put("message", messageService.findById(id));
         map.put("letters", MessageService.letters);
         return "form";
     }
+
 
     @PostMapping("/save")
     public String save(@ModelAttribute("message") Message message) {
