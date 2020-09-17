@@ -93,9 +93,9 @@
 
                                 <span style="float:right;margin-top: 5px">
                                     <a th:if="${message.isFavorite}" th:href="@{/favorite(messageId=${message.id})}"
-                                       class="btn btn-warning">Favorite</a>
+                                       class="btn btn-warning my-1">Favorite</a>
                                      <a th:if="${!message.isFavorite}" th:href="@{/favorite(messageId=${message.id})}"
-                                        class="btn btn-light">Favorite</a>
+                                        class="btn btn-light my-1">Favorite</a>
                                 </span>
                             </div>
                         </td>
