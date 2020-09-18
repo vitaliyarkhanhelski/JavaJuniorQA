@@ -74,6 +74,19 @@
             event.preventDefault();
         }
     });
+
+    let box = document.getElementById('title');
+    let prevVal = "";
+
+    box.addEventListener('beforeinput', (e) => {
+        prevVal = box.value;
+    });
+
+    box.addEventListener('input', (e) => {
+        if (!/^(|[a-zA-Zа-яА-Я][a-zA-Zа-яА-Я\s]*)$/.test(box.value)) {
+            box.value = prevVal;
+        }
+    });
 </script>
 
 </body>

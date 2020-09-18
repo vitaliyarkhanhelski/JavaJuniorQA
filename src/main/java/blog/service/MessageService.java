@@ -49,6 +49,19 @@ public class MessageService {
         return sortedMessages;
     }
 
+
+    public List<Message> findByWord(String word) {
+        List<Message> sortedMessages = new ArrayList<>();
+        for (Message message : messageRepository.findAll())
+            if (message.getName().contains(word)) sortedMessages.add(message);
+
+        Collections.sort(sortedMessages, new SortByCharAndName());
+        for (int i = 1; i < sortedMessages.size(); i++)
+            sortedMessages.get(i).setCharacter(null);
+        return sortedMessages;
+    }
+
+
     public List<Message> findFavoritesByChar(Character character) {
         List<Message> sortedMessages = new ArrayList<>();
         for (Message message : findAllFavorites())

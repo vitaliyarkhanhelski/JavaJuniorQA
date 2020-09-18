@@ -87,6 +87,23 @@ public class HomeController {
     }
 
 
+
+    @GetMapping("/findWord")
+    public String findByWord(ModelMap map, @RequestParam("word") String word) {
+
+        map.put("letters", MessageService.letters);
+
+//        if (info.equals("all")) return "redirect:";
+//        Character character = info.charAt(0);
+        List<Message> list = messageService.findByWord(word);
+
+        if (list.isEmpty()) map.put("noRecords", "No Records Found");
+        else map.put("messages", list);
+
+        return "index";
+    }
+
+
     @GetMapping("/findFavorites")
     public String findFavoritesByChar(ModelMap map, @RequestParam("info") Character info) {
 

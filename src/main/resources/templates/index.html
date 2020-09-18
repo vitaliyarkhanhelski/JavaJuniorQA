@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <title>Java Junior Q&A</title>
 </head>
 
@@ -20,7 +22,7 @@
 <div class="container">
     <div>
         <div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px">
-            <form action="/find" style="padding: 10px" class="form-inline">
+            <form action="/find" style="padding: 7px" class="form-inline">
                 <label class="mr-2 h6" for="inlineFormCustomSelectPref"><b>Select Letter:</b></label>
                 <select name="info" class="custom-select mr-sm-2" id="inlineFormCustomSelectPref">
                     <option value="all">Find All</option>
@@ -31,7 +33,7 @@
                 <button type="submit" class="btn btn-primary">Find</button>
             </form>
 
-            <form action="/findFavorites" style="padding: 10px" class="form-inline">
+            <form action="/findFavorites" style="padding: 7px" class="form-inline">
                 <label class="mr-2 h6" for="inlineFormCustomSelectPref2"><b>Select Letter:</b></label>
                 <select name="info" class="custom-select mr-sm-2" id="inlineFormCustomSelectPref2">
                     <option th:each="letter : ${letters}"
@@ -39,6 +41,11 @@
                             th:text="${letter}"/>
                 </select>
                 <button type="submit" class="btn btn-primary">Find Favorites</button>
+            </form>
+
+            <form action="/findWord" style="padding: 7px" class="form-inline" id="wordForm">
+                <input class="form-control mr-sm-2 col-xs-5" type="text" placeholder="Word" id="word" required name="word">
+                <button type="submit" class="btn btn-primary">Find</button>
             </form>
 
         </div>
@@ -128,6 +135,33 @@
         Developed by <a href="https://www.linkedin.com/in/vitaliyarkhanhelski/">Vitaliy Arkhanhelski</a> 2020
     </div>
 </div>
+
+<script>
+    //  Bind the event handler to the "submit" JavaScript event
+    $("#wordForm").submit(function (event) {
+        // Get the Login Name value and trim it
+        var name = $('#word').val();
+        // Check if empty of not
+        if (name.trim() === '') {
+            alert('Word field is empty.');
+            event.preventDefault();
+        }
+    });
+
+    let box = document.getElementById('word');
+    let prevVal = "";
+
+    box.addEventListener('beforeinput', (e) => {
+        prevVal = box.value;
+    });
+
+    box.addEventListener('input', (e) => {
+        if (!/^(|[a-zA-Zа-яА-Я][a-zA-Zа-яА-Я\s]*)$/.test(box.value)) {
+            box.value = prevVal;
+        }
+    });
+
+</script>
 
 </body>
 </html>
