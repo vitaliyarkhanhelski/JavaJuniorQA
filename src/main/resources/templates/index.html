@@ -22,7 +22,7 @@
     <form action="/findWord" style="padding: 3px" class="form-inline" id="wordForm">
         <table style="width:100%">
             <tr>
-                <td style="width:30%"></td>
+                <td style="width:30%; font-size: 1em; font-weight: bold;" th:text="${status}"></td>
                 <td style="width:0%"></td>
                 <td style="width:39%">
                     <label style="font-weight: bold"><h4><a href="/" style="color: #212529">Java Junior Q&A</a></h4>
@@ -125,9 +125,9 @@
                                 <span style="padding-left: 2px"></span>
 
                                 <span style="float:right;margin-top: 5px; padding-left: 20px">
-                                    <a th:if="${message.isFavorite}" th:href="@{/favorite(messageId=${message.id})}"
+                                    <a th:if="${message.isFavorite}" th:href="@{/favorite(messageId=${message.id}, page=${page})}"
                                        class="btn btn-warning my-1">Favorite</a>
-                                     <a th:if="${!message.isFavorite}" th:href="@{/favorite(messageId=${message.id})}"
+                                     <a th:if="${!message.isFavorite}" th:href="@{/favorite(messageId=${message.id}, page=${page})}"
                                         class="btn btn-light my-1">Favorite</a>
                                 </span>
 
