@@ -98,11 +98,8 @@ public class HomeController {
 
     @GetMapping("/findWord")
     public String findByWord(ModelMap map, @RequestParam("word") String word) {
-
         map.put("letters", MessageService.letters);
         map.put("status", "Search Results");
-//        if (info.equals("all")) return "redirect:";
-//        Character character = info.charAt(0);
         List<Message> list = messageService.findByWord(word);
 
         if (list.isEmpty()) map.put("noRecords", "No Records Found");
@@ -114,7 +111,6 @@ public class HomeController {
 
     @GetMapping("/findFavorites")
     public String findFavoritesByChar(ModelMap map, @RequestParam("info") Character info) {
-
         map.put("letters", MessageService.letters);
         map.put("status", info);
 
@@ -130,6 +126,7 @@ public class HomeController {
     public String findByChar(ModelMap map, @RequestParam("messageId") int id) {
         map.put("letters", MessageService.letters);
         map.put("messages", messageService.findById2(id));
+        map.put("status", "Record");
         return "index";
     }
 
@@ -139,6 +136,9 @@ public class HomeController {
         messageService.deleteById(id);
         return "redirect:";
     }
+
+
+    //____________________________________________
 
 
     @GetMapping("/showFormForAdd")
