@@ -52,6 +52,25 @@ public class HomeController {
     }
 
 
+    @GetMapping("/showToComplete")
+    public String showToComplete(ModelMap map) {
+        map.put("letters", MessageService.letters);
+        List<Message> list = messageService.findAllToComplete();
+        Collections.sort(list, new SortByCharAndName());
+        map.put("messages", list);
+
+        if (list.isEmpty()) map.put("noRecords", "No Records Found");
+        return "index";
+    }
+
+
+    @GetMapping("/complete")
+    public String isComplete(ModelMap map, @RequestParam("messageId") int id) {
+        messageService.checkComplete(id);
+        return "redirect:";
+    }
+
+
     @GetMapping("/find")
     public String findByChar(ModelMap map, @RequestParam("info") String info) {
 

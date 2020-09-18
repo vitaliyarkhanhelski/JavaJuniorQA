@@ -15,7 +15,7 @@
 <body>
 
 <div class="p-1 mb-1 bg-light text-dark" style="position: sticky; top:0; z-index: 10">
-    <h2 style="font-weight: bold; text-align: center">Java Junior Q&A</h2>
+    <h2 style="font-weight: bold; text-align: center"><a href="/" style="color: #212529">Java Junior Q&A</a></h2>
 </div>
 <div class="container">
     <div>
@@ -47,6 +47,8 @@
         <a th:href="@{/showFormForAdd}" class="btn btn-primary my-2 mb-3 ">Add Record</a>
         <span style="padding-left: 2px"></span>
         <a th:href="@{/showFavorites}" class="btn btn-warning my-2 mb-3 ">Show Favorites</a>
+        <span style="padding-left: 2px"></span>
+        <a th:href="@{/showToComplete}" class="btn btn-danger my-2 mb-3 ">To Complete List</a>
 
         <br>
 
@@ -93,12 +95,21 @@
                                    class="btn btn-success">Show</a>
                                 <span style="padding-left: 2px"></span>
 
-                                <span style="float:right;margin-top: 5px">
+                                <span style="float:right;margin-top: 5px; padding-left: 20px">
                                     <a th:if="${message.isFavorite}" th:href="@{/favorite(messageId=${message.id})}"
                                        class="btn btn-warning my-1">Favorite</a>
                                      <a th:if="${!message.isFavorite}" th:href="@{/favorite(messageId=${message.id})}"
                                         class="btn btn-light my-1">Favorite</a>
                                 </span>
+
+                                <span style="float:right; margin-top: 5px">
+                                  <a th:if="${!message.isComplete}" th:href="@{/complete(messageId=${message.id})}"
+                                     class="btn btn-light my-1">Completed</a>
+                                     <a th:if="${message.isComplete}" th:href="@{/complete(messageId=${message.id})}"
+                                        class="btn btn-danger my-1">To Complete</a>
+                                </span>
+
+
                             </div>
                         </td>
                     </tr>

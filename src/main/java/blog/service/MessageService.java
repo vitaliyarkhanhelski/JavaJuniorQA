@@ -88,10 +88,25 @@ public class MessageService {
         messageRepository.save(myMessage);
     }
 
+    public void checkComplete(int id) {
+        Message myMessage = messageRepository.findById(id).get();
+        if (myMessage.getIsComplete())
+            myMessage.setIsComplete(false);
+        else myMessage.setIsComplete(true);
+        messageRepository.save(myMessage);
+    }
+
     public List<Message> findAllFavorites() {
         List<Message> list = new ArrayList<>();
         for (Message message : messageRepository.findAll())
             if (message.getIsFavorite()) list.add(message);
+        return list;
+    }
+
+    public List<Message> findAllToComplete() {
+        List<Message> list = new ArrayList<>();
+        for (Message message : messageRepository.findAll())
+            if (message.getIsComplete()) list.add(message);
         return list;
     }
 }
