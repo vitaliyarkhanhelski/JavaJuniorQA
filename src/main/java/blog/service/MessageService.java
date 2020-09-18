@@ -53,7 +53,7 @@ public class MessageService {
     public List<Message> findByWord(String word) {
         List<Message> sortedMessages = new ArrayList<>();
         for (Message message : messageRepository.findAll())
-            if (message.getName().contains(word)) sortedMessages.add(message);
+            if (message.getName().toLowerCase().contains(word.toLowerCase())) sortedMessages.add(message);
 
         Collections.sort(sortedMessages, new SortByCharAndName());
         for (int i = 1; i < sortedMessages.size(); i++)
