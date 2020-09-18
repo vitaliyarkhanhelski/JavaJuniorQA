@@ -23,12 +23,17 @@ public class HomeController {
     @GetMapping
     public String findAll(ModelMap map) {
         map.put("letters", MessageService.letters);
-        map.put("status", "Main");
 
         List<Message> list = messageService.findAll();
 
-        if (list.isEmpty()) map.put("noRecords", "No Records Found");
-        else map.put("messages", list);
+        if (list.isEmpty()) {
+            map.put("status", "Main");
+            map.put("noRecords", "No Records Found");
+        }
+        else {
+            map.put("messages", list);
+            map.put("status","Main ("+list.size()+")");
+        }
 
         return "index";
     }
@@ -38,12 +43,15 @@ public class HomeController {
     public String showFavorites(ModelMap map) {
         map.put("letters", MessageService.letters);
         map.put("page", "f");
-        map.put("status", "Favorites");
+
         List<Message> list = messageService.findAllFavorites();
         Collections.sort(list, new SortByCharAndName());
         map.put("messages", list);
 
-        if (list.isEmpty()) map.put("noRecords", "No Records Found");
+        if (list.isEmpty()) {
+            map.put("noRecords", "No Records Found");
+            map.put("status", "Favorites");
+        } else map.put("status", "Favorites ("+list.size()+")");
         return "index";
     }
 
@@ -61,12 +69,15 @@ public class HomeController {
     public String showToComplete(ModelMap map) {
         map.put("letters", MessageService.letters);
         map.put("page", "c");
-        map.put("status", "To Complete");
+
         List<Message> list = messageService.findAllToComplete();
         Collections.sort(list, new SortByCharAndName());
         map.put("messages", list);
 
-        if (list.isEmpty()) map.put("noRecords", "No Records Found");
+        if (list.isEmpty()) {
+            map.put("noRecords", "No Records Found");
+            map.put("status", "To Complete");
+        } else map.put("status", "To Complete ("+list.size()+")");
         return "index";
     }
 
@@ -86,11 +97,17 @@ public class HomeController {
 
         if (info.equals("all")) return "redirect:";
         Character character = info.charAt(0);
-        map.put("status", character);
+
         List<Message> list = messageService.findByChar(character);
 
-        if (list.isEmpty()) map.put("noRecords", "No Records Found");
-        else map.put("messages", list);
+        if (list.isEmpty()) {
+            map.put("noRecords", "No Records Found");
+            map.put("status", character);
+        }
+        else {
+            map.put("messages", list);
+            map.put("status", character+" ("+list.size()+")");
+        }
 
         return "index";
     }
@@ -99,11 +116,17 @@ public class HomeController {
     @GetMapping("/findWord")
     public String findByWord(ModelMap map, @RequestParam("word") String word) {
         map.put("letters", MessageService.letters);
-        map.put("status", "Search Results");
+
         List<Message> list = messageService.findByWord(word);
 
-        if (list.isEmpty()) map.put("noRecords", "No Records Found");
-        else map.put("messages", list);
+        if (list.isEmpty()) {
+            map.put("noRecords", "No Records Found");
+            map.put("status", "Search Results");
+        }
+        else {
+            map.put("messages", list);
+            map.put("status", "Search Results ("+list.size()+")");
+        }
 
         return "index";
     }
@@ -112,11 +135,16 @@ public class HomeController {
     @GetMapping("/findFavorites")
     public String findFavoritesByChar(ModelMap map, @RequestParam("info") Character info) {
         map.put("letters", MessageService.letters);
-        map.put("status", info);
 
         List<Message> list = messageService.findFavoritesByChar(info);
-        if (list.isEmpty()) map.put("noRecords", "No Records Found");
-        else map.put("messages", list);
+        if (list.isEmpty()) {
+            map.put("noRecords", "No Records Found");
+            map.put("status", info);
+        }
+        else {
+            map.put("messages", list);
+            map.put("status", info+" ("+list.size()+")");
+        }
 
         return "index";
     }
