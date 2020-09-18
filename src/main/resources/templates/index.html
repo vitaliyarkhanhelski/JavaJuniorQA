@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
           integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -17,7 +18,28 @@
 <body>
 
 <div class="p-1 mb-1 bg-light text-dark" style="position: sticky; top:0; z-index: 10">
-    <h2 style="font-weight: bold; text-align: center"><a href="/" style="color: #212529">Java Junior Q&A</a></h2>
+
+    <form action="/findWord" style="padding: 7px" class="form-inline" id="wordForm">
+        <table style="width:100%">
+            <tr>
+                <td style="width:24%"></td>
+                <td style="width:0%"></td>
+                <td style="width:51%">
+                    <label style="font-weight: bold"><h2><a href="/" style="color: #212529">Java Junior Q&A</a></h2>
+                    </label>
+                </td>
+                <td style="width:0%"></td>
+                <td style="width:25%;text-align:right">
+                    <div>
+                            <input class="form-control mr-sm-1" type="text" placeholder="Word" id="word"
+                                   required
+                                   name="word">
+                            <button type="submit" class="btn btn-primary mr-sm-1">Find</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 <div class="container">
     <div>
@@ -43,10 +65,10 @@
                 <button type="submit" class="btn btn-primary">Find Favorites</button>
             </form>
 
-            <form action="/findWord" style="padding: 7px" class="form-inline" id="wordForm">
-                <input class="form-control mr-sm-2 col-xs-5" type="text" placeholder="Word" id="word" required name="word">
-                <button type="submit" class="btn btn-primary">Find</button>
-            </form>
+            <!--            <form action="/findWord" style="padding: 7px" class="form-inline" id="wordForm">-->
+            <!--                <input class="form-control mr-sm-2 col-xs-5" type="text" placeholder="Word" id="word" required name="word">-->
+            <!--                <button type="submit" class="btn btn-primary">Find</button>-->
+            <!--            </form>-->
 
         </div>
 
