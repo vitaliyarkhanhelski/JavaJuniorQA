@@ -141,8 +141,10 @@ public class HomeController {
 
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("messageId") int id, ModelMap map) {
-        map.put("message", messageService.findById(id));
+        Message message = messageService.findById(id);
+        map.put("message", message);
         map.put("letters", MessageService.letters);
+//        map.put("myLetter", message.getCharacter());
         return "form";
     }
 

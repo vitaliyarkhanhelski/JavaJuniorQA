@@ -26,6 +26,7 @@
             <h5>
                 <label class="my-1 mr-2 mb-1" for="inlineFormCustomSelectPref"><b>Select Letter:</b></label>
                 <select th:field="*{character}" id="inlineFormCustomSelectPref">
+                    <option th:value="${myLetter}" th:text="${myLetter}"/>
                     <option th:each="letter : ${letters}"
                             th:value="${letter}"
                             th:text="${letter}"/>
