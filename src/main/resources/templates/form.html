@@ -65,7 +65,6 @@
 </div>
 
 <script>
-    //  Bind the event handler to the "submit" JavaScript event
     $(".save").submit(function (event) {
         // Get the Login Name value and trim it
         var name = $('#title').val();
@@ -86,6 +85,17 @@
     box.addEventListener('input', (e) => {
         if (!/^(|[a-zA-Zа-яА-Я][a-zA-Zа-яА-Я\s]*)$/.test(box.value)) {
             box.value = prevVal;
+        }
+    });
+
+    //  Bind the event handler to the "submit" JavaScript event
+    $(".save").submit(function (event) {
+        // Get the Login Name value and trim it
+        var letter = $('#inlineFormCustomSelectPref').val();
+        // Check if empty of not
+        if (letter === '') {
+            alert('Letter is empty.');
+            event.preventDefault();
         }
     });
 </script>
