@@ -22,7 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .inMemoryAuthentication()
                 .passwordEncoder(passwordEncoder)
                 .withUser("admin")
-                .password("$2a$10$xnQcn0Hmg.G/C63BHwFw6O7EJP3TiO2hjmI/AV4AGZxlUnwE6koia")
+                //.password("$2a$10$xnQcn0Hmg.G/C63BHwFw6O7EJP3TiO2hjmI/AV4AGZxlUnwE6koia")
+                .password("$2a$10$zWXgio4NH6qQ5/Mpbbh2XuUpxDVFHApOlGvbJ3WpropoxDHW/Tsr6")
                 .roles("ADMIN");
     }
 
