@@ -132,9 +132,9 @@
                                 </span>
 
                                 <span style="float:right; margin-top: 5px">
-                                  <a th:if="${!message.isComplete}" th:href="@{/complete(messageId=${message.id})}"
+                                  <a th:if="${!message.isComplete}" th:href="@{/complete(messageId=${message.id}, page=${page})}"
                                      class="btn btn-light my-1">Completed</a>
-                                     <a th:if="${message.isComplete}" th:href="@{/complete(messageId=${message.id})}"
+                                     <a th:if="${message.isComplete}" th:href="@{/complete(messageId=${message.id}, page=${page})}"
                                         class="btn btn-danger my-1">To Complete</a>
                                 </span>
 

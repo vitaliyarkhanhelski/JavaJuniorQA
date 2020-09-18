@@ -23,6 +23,7 @@ public class HomeController {
     @GetMapping
     public String findAll(ModelMap map) {
         map.put("letters", MessageService.letters);
+        map.put("page","c");
 
         List<Message> list = messageService.findAll();
 
