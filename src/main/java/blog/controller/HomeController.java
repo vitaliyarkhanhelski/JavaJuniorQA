@@ -17,6 +17,7 @@ public class HomeController {
     static String myWord;
     static String myLetter;
     static Character myLetterFavorite;
+    static int myMessageId;
 
     private MessageService messageService;
 
@@ -170,8 +171,9 @@ public class HomeController {
 
 
     @GetMapping("/findRecord")
-    public String findByChar(ModelMap map, @RequestParam("messageId") int id) {
+    public String findByChar(ModelMap map, @RequestParam(value = "messageId", required = false) Integer id) {
         map.put("letters", MessageService.letters);
+        if (id == null) id = myMessageId;
         map.put("messages", messageService.findById2(id));
         map.put("status", "Record");
         return "index";
@@ -210,7 +212,8 @@ public class HomeController {
     @PostMapping("/save")
     public String save(@ModelAttribute("message") Message message) {
         messageService.save(message);
-        return "redirect:";
+        myMessageId = message.getId();
+        return "redirect:/findRecord";
     }
 
 }
