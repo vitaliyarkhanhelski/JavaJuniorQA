@@ -182,7 +182,7 @@
     });
 
     box.addEventListener('input', (e) => {
-        if (!/^(|[a-zA-Zа-яА-Я][a-zA-Zа-яА-Я\s]*)$/.test(box.value)) {
+        if (!/^(|[-a-zA-Zа-яА-Я0-9:,.;$#&@%=/?!<>{}\[\]+"()łąężźćóńś][-a-zA-Zа-яА-Я0-9:,.;"()?!<>{}\[\]ł/ąężźćóń$@#&%=+ś\s]*)$/.test(box.value)) {
             box.value = prevVal;
         }
     });
