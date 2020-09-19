@@ -14,6 +14,10 @@ import java.util.List;
 @Controller
 public class HomeController {
 
+    static String myWord;
+    static String myLetter;
+    static Character myLetterFavorite;
+
     private MessageService messageService;
 
     public HomeController(MessageService messageService) {
@@ -29,10 +33,9 @@ public class HomeController {
         if (list.isEmpty()) {
             map.put("status", "Main");
             map.put("noRecords", "No Records Found");
-        }
-        else {
+        } else {
             map.put("messages", list);
-            map.put("status","Main ("+list.size()+")");
+            map.put("status", "Main (" + list.size() + ")");
         }
 
         return "index";
@@ -51,7 +54,7 @@ public class HomeController {
         if (list.isEmpty()) {
             map.put("noRecords", "No Records Found");
             map.put("status", "Favorites");
-        } else map.put("status", "Favorites ("+list.size()+")");
+        } else map.put("status", "Favorites (" + list.size() + ")");
         return "index";
     }
 
@@ -61,6 +64,10 @@ public class HomeController {
         messageService.checkFavorite(id);
         if (page.equals("f")) return "redirect:/showFavorites";
         if (page.equals("c")) return "redirect:/showToComplete";
+        if (page.equals("w")) return "redirect:/findWord";
+        if (page.equals("fl")) return "redirect:/find";
+        if (page.equals("flf")) return "redirect:/findFavorites";
+
         return "redirect:";
     }
 
@@ -77,7 +84,7 @@ public class HomeController {
         if (list.isEmpty()) {
             map.put("noRecords", "No Records Found");
             map.put("status", "To Complete");
-        } else map.put("status", "To Complete ("+list.size()+")");
+        } else map.put("status", "To Complete (" + list.size() + ")");
         return "index";
     }
 
@@ -87,13 +94,20 @@ public class HomeController {
         messageService.checkComplete(id);
         if (page.equals("c")) return "redirect:/showToComplete";
         if (page.equals("f")) return "redirect:/showFavorites";
+        if (page.equals("w")) return "redirect:/findWord";
+        if (page.equals("fl")) return "redirect:/find";
+        if (page.equals("flf")) return "redirect:/findFavorites";
         return "redirect:";
     }
 
 
     @GetMapping("/find")
-    public String findByChar(ModelMap map, @RequestParam("info") String info) {
+    public String findByChar(ModelMap map, @RequestParam(value = "info", required = false) String info) {
         map.put("letters", MessageService.letters);
+        map.put("page", "fl");
+
+        if (info == null) info = myLetter;
+        else myLetter = info;
 
         if (info.equals("all")) return "redirect:";
         Character character = info.charAt(0);
@@ -103,10 +117,9 @@ public class HomeController {
         if (list.isEmpty()) {
             map.put("noRecords", "No Records Found");
             map.put("status", character);
-        }
-        else {
+        } else {
             map.put("messages", list);
-            map.put("status", character+" ("+list.size()+")");
+            map.put("status", character + " (" + list.size() + ")");
         }
 
         return "index";
@@ -114,18 +127,21 @@ public class HomeController {
 
 
     @GetMapping("/findWord")
-    public String findByWord(ModelMap map, @RequestParam("word") String word) {
+    public String findByWord(ModelMap map, @RequestParam(value = "word", required = false) String word) {
         map.put("letters", MessageService.letters);
+        map.put("page", "w");
+
+        if (word == null) word = myWord;
+        else myWord = word;
 
         List<Message> list = messageService.findByWord(word);
 
         if (list.isEmpty()) {
             map.put("noRecords", "No Records Found");
             map.put("status", "Search Results");
-        }
-        else {
+        } else {
             map.put("messages", list);
-            map.put("status", "Search Results ("+list.size()+")");
+            map.put("status", "Search Results (" + list.size() + ")");
         }
 
         return "index";
@@ -133,17 +149,20 @@ public class HomeController {
 
 
     @GetMapping("/findFavorites")
-    public String findFavoritesByChar(ModelMap map, @RequestParam("info") Character info) {
+    public String findFavoritesByChar(ModelMap map, @RequestParam(value = "info", required = false) Character info) {
         map.put("letters", MessageService.letters);
+        map.put("page", "flf");
+
+        if (info == null) info = myLetterFavorite;
+        else myLetterFavorite = info;
 
         List<Message> list = messageService.findFavoritesByChar(info);
         if (list.isEmpty()) {
             map.put("noRecords", "No Records Found");
             map.put("status", info);
-        }
-        else {
+        } else {
             map.put("messages", list);
-            map.put("status", info+" ("+list.size()+")");
+            map.put("status", info + " (" + list.size() + ")");
         }
 
         return "index";

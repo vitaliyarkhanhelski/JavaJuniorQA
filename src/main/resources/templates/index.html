@@ -125,16 +125,20 @@
                                 <span style="padding-left: 2px"></span>
 
                                 <span style="float:right;margin-top: 5px; padding-left: 20px">
-                                    <a th:if="${message.isFavorite}" th:href="@{/favorite(messageId=${message.id}, page=${page})}"
+                                    <a th:if="${message.isFavorite}"
+                                       th:href="@{/favorite(messageId=${message.id}, page=${page})}"
                                        class="btn btn-warning my-1">Favorite</a>
-                                     <a th:if="${!message.isFavorite}" th:href="@{/favorite(messageId=${message.id}, page=${page})}"
+                                     <a th:if="${!message.isFavorite}"
+                                        th:href="@{/favorite(messageId=${message.id}, page=${page})}"
                                         class="btn btn-light my-1">Favorite</a>
                                 </span>
 
                                 <span style="float:right; margin-top: 5px">
-                                  <a th:if="${!message.isComplete}" th:href="@{/complete(messageId=${message.id}, page=${page})}"
+                                  <a th:if="${!message.isComplete}"
+                                     th:href="@{/complete(messageId=${message.id}, page=${page})}"
                                      class="btn btn-light my-1">Completed</a>
-                                     <a th:if="${message.isComplete}" th:href="@{/complete(messageId=${message.id}, page=${page})}"
+                                     <a th:if="${message.isComplete}"
+                                        th:href="@{/complete(messageId=${message.id}, page=${page})}"
                                         class="btn btn-danger my-1">To Complete</a>
                                 </span>
 
